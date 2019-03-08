@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Boot to Angular with JS</title>
+</head>
+<body>
+<h1>Boot to Angular with JS</h1>
+
+<!--<script>-->
+    <!--const url = "http://localhost:8080/login";-->
+    <!--var xhttp = new XMLHttpRequest();-->
+    <!--let header;-->
+    <!--xhttp.onreadystatechange= function () {-->
+        <!--if(this.readyState == 4 && this.status == 200){-->
+            <!--document.getElementById("logination").innerHTML=-->
+                <!--this.getResponseHeader("Authorization");-->
+            <!--//console.log("YYYY"+this.getResponseHeader("Authorization"));-->
+            <!--document.getElementById("getting").innerHTML=-->
+                <!--this.responseText;-->
+            <!--//localStorage.clear();-->
+            <!--localStorage.setItem("_token", this.getResponseHeader("Authorization"));-->
+            <!--header = this.getResponseHeader("Authorization");-->
+        <!--}else {-->
+            <!--//localStorage.clear();-->
+            <!--console.log("YYYY"+this.getResponseHeader("Authorization"));-->
+            <!--console.log("XXXX"+localStorage.getItem('_token'));-->
+            <!--console.log("GGGG"+this.responseText);-->
+        <!--}-->
+    <!--};-->
+    <!--xhttp.open("POST" , url, true);-->
+    <!--xhttp.send(JSON.stringify({username: 'admin', password: 'admin'}));-->
+
+   <!--xhttp.open("GET", "http://localhost:8080/get", true);-->
+    <!--const headersOption =-->
+        <!--new Headers({'Authorization': localStorage.getItem('_token')});-->
+    <!--xhttp.setRequestHeader('Authorization', localStorage.getItem('_token'));-->
+   <!--xhttp.send(JSON.stringify({headers: headersOption, responseType: 'text'}));-->
+
+
+<!--</script>-->
+
+<p>Result Logination</p>
+<div id="logination"></div>
+<p>Result Method Get</p>
+<div id="getting"></div>
+
+</body>
+</html>
