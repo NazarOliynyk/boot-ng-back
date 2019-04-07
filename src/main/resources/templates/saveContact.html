@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html  xmlns:xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Save Contatc</title>
+</head>
+<body>
+
+<h3> Creating  a new CONTACT </h3>
+<form th:action="@{/saveContact}" method="post">
+    <input type="text" name="contactName" placeholder="contactName"/>
+    <input type="email" name="contactEmail" placeholder="contactEmail"/>
+    <input type="submit" value="Save Contact"/>
+</form>
+
+</body>
+</html>
+

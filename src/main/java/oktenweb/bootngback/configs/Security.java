@@ -33,6 +33,7 @@ public class Security extends WebSecurityConfigurerAdapter {
 //        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //            auth.inMemoryAuthentication().withUser("admin").password("{noop}admin").roles("ADMIN");
 //            auth.inMemoryAuthentication().withUser("user").password("{noop}user").roles("USER");
+//            auth.userDetailsService(userDetailsService);
 //        }
 
     @Bean
@@ -78,6 +79,11 @@ public class Security extends WebSecurityConfigurerAdapter {
                     HttpMethod.PUT.name(),
                     HttpMethod.DELETE.name()));
             configuration.addExposedHeader("Authorization");
+            configuration.addExposedHeader("UserLogged");
+            configuration.addExposedHeader("UserClass");
+            configuration.addExposedHeader("UserLoggedBody");
+            configuration.addExposedHeader("UserLoggedTotal");
+            configuration.addExposedHeader("UserAuthenticated");
             UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
             source.registerCorsConfiguration("/**", configuration);
            // source.registerCorsConfiguration("/saveEvent", configuration);

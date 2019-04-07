@@ -3,13 +3,19 @@ package oktenweb.bootngback.configs;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import oktenweb.bootngback.dao.UserDAO;
 import oktenweb.bootngback.models.AccountCredentials;
+import oktenweb.bootngback.services.impl.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -18,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
-
+import java.util.List;
 
 public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 
@@ -37,6 +43,19 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 // and pass it on to TokenAuthenticationService, which will then add a JWT to the response.
 
     private AccountCredentials creds;
+
+//    @Autowired
+//    UserDAO userDAO;
+//    @Bean
+//    List<AccountCredentials> findAll(){
+//        return new UserServiceImpl().findAll();
+//    };
+//    @Bean
+//    AccountCredentials loadUserByUsername(String username){
+//        return (AccountCredentials) new UserServiceImpl().loadUserByUsername(username);
+//    };
+
+//    UserServiceImpl userService = new UserServiceImpl();
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws AuthenticationException, IOException, ServletException {
@@ -80,7 +99,14 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
                 .setExpiration(new Date(System.currentTimeMillis() + 200000))
                 .compact();
         //and add it to header
+        ObjectMapper mapper = new ObjectMapper();
         res.addHeader("Authorization", "Bearer " + jwtoken);
+        res.addHeader("UserLogged", "User.password " + creds.getUsername());
+        res.addHeader("UserClass", "User.class " + creds.getClass().toString());
+        res.addHeader("UserLoggedBody", "User.body " + mapper.writeValueAsString(creds));
+        res.addHeader("UserLoggedTotal", "User " + creds);
+       // AccountCredentials accountCredentials = (AccountCredentials)auth;
+        res.addHeader("UserAuthenticated", "User " + auth.getName());
 
     }
 }
